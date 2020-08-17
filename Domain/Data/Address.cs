@@ -1,3 +1,4 @@
+using System;
 using Domain.Entities;
 
 namespace Domain.Data
@@ -24,6 +25,21 @@ namespace Domain.Data
             City = city;
             State = state;
             ZipCode = zipCode;
+        }
+
+        public override string ToString()
+        {
+            var complement = "";
+            if(!string.IsNullOrWhiteSpace(Complement))
+                complement = $"{Complement},";
+
+            return $"{Street}, nº {Number}, {complement} {Neighbourhood},"
+                + $" {City}, {State} - {formatZipCode(ZipCode)}";
+        }
+
+        private string formatZipCode(string zipCode) 
+        {
+            return Convert.ToUInt64(zipCode).ToString(@"00000\-000");
         }
     }
 }

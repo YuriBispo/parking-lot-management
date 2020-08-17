@@ -37,13 +37,16 @@ namespace Infra.InMemoryDataAccess.Repositories
 
         public IQueryable<Data.Establishment> GetAll()
         {
-            return _context.Establishments.AsNoTracking();
+            return _context.Establishments
+                .AsNoTracking()
+                .Include(x => x.Address);
         }
 
         public Data.Establishment GetById(int Id)
         {
             return _context.Establishments
                 .AsNoTracking()
+                .Include(x => x.Address)
                 .FirstOrDefault(x => x.Id == Id);
         }
 

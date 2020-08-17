@@ -10,18 +10,18 @@ using MediatR;
 
 namespace Application.Handlers.Establishments
 {
-    public class CreateEstablishmentHandler
-        : IRequestHandler<CreateEstablishmentRequest, CreateEstablishmentResponse>
+    public class UpdateEstablishmentHandler
+        : IRequestHandler<UpdateEstablishmentRequest, UpdateEstablishmentResponse>
     {
         private readonly IEstablishmentRepository _repository;
 
-        public CreateEstablishmentHandler(IEstablishmentRepository repository)
+        public UpdateEstablishmentHandler(IEstablishmentRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<CreateEstablishmentResponse> Handle(
-            CreateEstablishmentRequest request, 
+        public async Task<UpdateEstablishmentResponse> Handle(
+            UpdateEstablishmentRequest request, 
             CancellationToken cancellationToken)
         {
             
@@ -39,20 +39,22 @@ namespace Application.Handlers.Establishments
                 request.CarsCapacity,
                 request.MotorcyclesCapacity);
 
-            var result = await _repository.Create(establishment.ToDataEntity());
+            var establishmentStored = _repository.GetById(request.Id);
 
-            var test = establishment.Address.ToString();
+            establishmentStored = establishment.ToDataEntity();
+            var result = _repository.Update(establishmentStored);
+
             _repository.CommitChanges();
 
-            return new CreateEstablishmentResponse(
+            return await Task.FromResult(new UpdateEstablishmentResponse(
                 result.Id,
                 result.Name,
                 result.CNPJ,
-                establishment.Address.ToString(),
+                result.Address.ToString(),
                 result.Phone,
                 result.CarsCapacity,
                 result.MotorcyclesCapacity
-            );
+            ));
         }
     }
 }
