@@ -77,7 +77,7 @@ namespace Tests.UnitTests
         [Fact]
         public void Should_Throw_Exception_At_Loading_With_No_Parameters_Given() 
         {
-            Assert.ThrowsAny<System.ArgumentException>(() => {
+            Assert.ThrowsAny<Exception>(() => {
                 var establishment = new Establishment(
                     null,
                     null,
@@ -337,6 +337,22 @@ namespace Tests.UnitTests
 
             Assert.Equal(motorcyclesCapacity - 1, 
                 establishment.MotorcyclesCapacity);
+        }
+    
+        [Fact]
+        public void Should_Generate_ParkingSpaces_At_Loading()
+        {
+            var establishment = new Establishment(
+                new Name("Estacionamento do seu Zé"),
+                new CNPJ("23583549000151"),
+                new Address("R. Dorival", "123", "Estoril", "BH", "MG", 
+                    "32548542", "ap 1200"),
+                new Phone("31", "31353437"),
+                10,
+                15
+            );
+
+            Assert.Equal(25, establishment.ParkingSpaces.Count);
         }
     }
 }

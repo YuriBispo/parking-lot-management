@@ -5,7 +5,7 @@ using Data = Domain.Data;
 
 namespace Domain.Entities.Addresses
 {
-    public class Address
+    public class Address : IDomainEntity<Data.Address>
     {
         public int Id { get; private set; }
         public string Street { get; private set; }

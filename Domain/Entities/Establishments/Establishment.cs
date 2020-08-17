@@ -1,12 +1,14 @@
 using System;
+using System.Collections.Generic;
 using Domain.Entities.Addresses;
 using Domain.Entities.Establishments.Exceptions;
 using Domain.Entities.Establishments.ValueObjects;
-using Data = Domain.Data;
+using Domain.Entities.ParkingSpaces;
+using Domain.Entities.ParkingSpaces.Enum;
 
 namespace Domain.Entities.Establishments
 {
-    public class Establishment
+    public class Establishment : IDomainEntity<Data.Establishment>
     {
         public int Id { get; private set; }
         public Name Name { get; private set; }
@@ -15,6 +17,7 @@ namespace Domain.Entities.Establishments
         public Phone Phone { get; private set; }
         public int CarsCapacity { get; private set; }
         public int MotorcyclesCapacity { get; private set; }
+        public ICollection<ParkingSpace> ParkingSpaces { get; private set; }
 
         public Establishment(Name name, CNPJ cnpj, Address address, Phone phone,
             int carsCapacity, int motorcyclesCapacity)
@@ -26,6 +29,7 @@ namespace Domain.Entities.Establishments
             CNPJ = cnpj;
             Address = address;
             Phone = phone;
+            ParkingSpaces = new List<ParkingSpace>();
 
             if(carsCapacity < 1)
                 throw new CarsCapacityShouldBePositive(
@@ -33,6 +37,7 @@ namespace Domain.Entities.Establishments
                 );
 
             CarsCapacity = carsCapacity;
+            GenerateParkingSpaces(ParkingSpaceType.Car, CarsCapacity);
 
             if(motorcyclesCapacity < 1)
                 throw new MotorcyclesCapacityShouldBePositive(
@@ -40,6 +45,16 @@ namespace Domain.Entities.Establishments
                 );
 
             MotorcyclesCapacity = motorcyclesCapacity;
+            GenerateParkingSpaces(ParkingSpaceType.Motorcycle, 
+                motorcyclesCapacity);
+        }
+
+        private void GenerateParkingSpaces(ParkingSpaceType type, int quantity)
+        {
+            for (int i = 0; i < quantity; i++)
+            {
+                ParkingSpaces.Add(new ParkingSpace(type));
+            }
         }
 
         public Data.Establishment ToDataEntity()

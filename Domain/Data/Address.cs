@@ -1,6 +1,8 @@
+using Domain.Entities;
+
 namespace Domain.Data
 {
-    public sealed class Address
+    public sealed class Address : IDataEntity
     {
         public int Id { get; set; }
         public string Street { get; set; }
