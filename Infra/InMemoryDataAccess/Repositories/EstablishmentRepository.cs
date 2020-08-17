@@ -15,6 +15,11 @@ namespace Infra.InMemoryDataAccess.Repositories
             _context = context;
         }
 
+        public void CommitChanges()
+        {
+            _context.SaveChanges();
+        }
+
         public async Task<Data.Establishment> Create(Data.Establishment entity)
         {
             await _context.AddAsync(entity);

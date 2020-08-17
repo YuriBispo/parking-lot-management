@@ -14,6 +14,11 @@ namespace Domain.Data
         public int MotorcyclesCapacity { get; set; }
         public ICollection<ParkingSpace> ParkingSpaces { get; set;}
 
+        public Establishment()
+        {
+            
+        }
+        
         public Establishment(int id,string name, string cnpj, Address address, string phone,
             int carsCapacity, int motorcyclesCapacity)
         {

@@ -11,5 +11,6 @@ namespace Infra.InMemoryDataAccess.Repositories.IRepositories
         Establishment GetById(int Id);
         Establishment Update(Establishment entity);
         int Delete(int Id);
+        void CommitChanges();
     }
 }
