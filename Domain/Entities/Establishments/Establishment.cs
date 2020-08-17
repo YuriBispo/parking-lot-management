@@ -1,10 +1,10 @@
 using System;
-using Domain.Addresses;
-using Domain.Establishments.Exceptions;
-using Domain.Establishments.ValueObjects;
+using Domain.Entities.Addresses;
+using Domain.Entities.Establishments.Exceptions;
+using Domain.Entities.Establishments.ValueObjects;
 using Data = Domain.Data;
 
-namespace Domain.Establishments
+namespace Domain.Entities.Establishments
 {
     public class Establishment
     {

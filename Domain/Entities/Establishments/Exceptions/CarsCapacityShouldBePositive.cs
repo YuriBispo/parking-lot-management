@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Establishments.Exceptions
+namespace Domain.Entities.Establishments.Exceptions
 {
     public class CarsCapacityShouldBePositive : Exception
     {

@@ -1,13 +1,14 @@
 using System;
-using Domain.Addresses;
-using Domain.Establishments;
-using Domain.Establishments.ValueObjects;
+using Domain.Entities.Addresses;
+using Domain.Entities.Establishments;
+using Domain.Entities.Establishments.Exceptions;
+using Domain.Entities.Establishments.ValueObjects;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace Tests
+namespace Tests.UnitTests
 {
-    public class EstablishmentTest
+    public class EstablishmentTests
     {
         [Fact]
         public void Should_Load_Correctly()
@@ -42,15 +43,46 @@ namespace Tests
         }
 
         [Fact]
-        public void Should_Throw_Exception_At_Loading_With_No_Parameters_Given() 
+        public void Should_Throw_Exception_If_Cars_Capacity_Is_Negative() 
         {
             Assert.ThrowsAny<Exception>(() => {
                 var establishment = new Establishment(
-                    new Name(""),
-                    new CNPJ(""),
-                    new Address("", "", "", "", "", 
-                        "", ""),
-                    new Phone("", ""),
+                    new Name("Estacionamento do seu Zé"),
+                    new CNPJ("23583549000151"),
+                    new Address("R. Dorival", "123", "Estoril", "BH", "MG", 
+                        "32548542", "ap 1200"),
+                    new Phone("31", "31353437"),
+                    -10,
+                    0
+                );  
+            });
+        }
+
+        [Fact]
+        public void Should_Throw_Exception_If_Motorcycles_Capacity_Is_Negative() 
+        {
+            Assert.ThrowsAny<Exception>(() => {
+                var establishment = new Establishment(
+                    new Name("Estacionamento do seu Zé"),
+                    new CNPJ("23583549000151"),
+                    new Address("R. Dorival", "123", "Estoril", "BH", "MG", 
+                        "32548542", "ap 1200"),
+                    new Phone("31", "31353437"),
+                    10,
+                    -5
+                );  
+            });
+        }
+
+        [Fact]
+        public void Should_Throw_Exception_At_Loading_With_No_Parameters_Given() 
+        {
+            Assert.ThrowsAny<System.ArgumentException>(() => {
+                var establishment = new Establishment(
+                    null,
+                    null,
+                    null,
+                    null,
                     0,
                     0
                 );  
@@ -76,7 +108,7 @@ namespace Tests
         [Fact]
         public void Should_Throw_Exception_At_Loading_With_No_CNPJ_Given() 
         {
-            Assert.ThrowsAny<Exception>(() => {
+            Assert.Throws<CNPJShouldNotBeEmptyOrWhiteSpaceException>(() => {
                 var establishment = new Establishment(
                     new Name("Teste"),
                     new CNPJ(""),
@@ -92,7 +124,7 @@ namespace Tests
         [Fact]
         public void Should_Throw_Exception_At_Loading_With_No_Address_Given() 
         {
-            Assert.ThrowsAny<Exception>(() => {
+            Assert.ThrowsAny<AddressFieldShouldNotBeEmpty>(() => {
                 var establishment = new Establishment(
                     new Name("Teste"),
                     new CNPJ("01128525000170"),
@@ -108,7 +140,7 @@ namespace Tests
         [Fact]
         public void Should_Throw_Exception_At_Loading_With_No_Phone_Given() 
         {
-            Assert.ThrowsAny<Exception>(() => {
+            Assert.ThrowsAny<PhoneCodeAreaShouldNotBeEmptyException>(() => {
                 var establishment = new Establishment(
                     new Name("Teste"),
                     new CNPJ("01128525000170"),
@@ -117,6 +149,22 @@ namespace Tests
                     new Phone("", ""),
                     0,
                     0
+                );  
+            });
+        }
+
+        [Fact]
+        public void Should_Throw_Exception_At_Loading_With_No_Phone_Number_In_Invalid_Format() 
+        {
+            Assert.ThrowsAny<PhoneNumberInvalidFormatException>(() => {
+                var establishment = new Establishment(
+                    new Name("Teste"),
+                    new CNPJ("01128525000170"),
+                    new Address("R. Dorival", "123", "Estoril", "BH", "MG", 
+                        "32548542", "ap 1200"),
+                    new Phone("31", "5456546879554"),
+                    2,
+                    5
                 );  
             });
         }
@@ -232,6 +280,7 @@ namespace Tests
             Assert.Equal(carsCapacity + 1, establishment.CarsCapacity);
         }
 
+        [Fact]
         public void Should_Remove_A_Parking_Space_For_A_Car() 
         {
             var carsCapacity = 10;

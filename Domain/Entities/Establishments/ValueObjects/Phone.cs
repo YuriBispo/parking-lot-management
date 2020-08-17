@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Domain.Entities.Establishments.Exceptions;
 
-namespace Domain.Establishments.ValueObjects
+namespace Domain.Entities.Establishments.ValueObjects
 {
     public class Phone : IEquatable<Phone>
     {
@@ -10,7 +11,22 @@ namespace Domain.Establishments.ValueObjects
 
         public Phone(string codeArea, string number)
         {
+            if(string.IsNullOrWhiteSpace(codeArea))
+            {
+                throw new PhoneCodeAreaShouldNotBeEmptyException(
+                    "Phone code area should not be empty"
+                );
+            }
+
             _codeArea = codeArea;
+
+            if(number.Length > 11 || number.Length < 8) 
+            {
+                throw new PhoneNumberInvalidFormatException(
+                    "Phone number should be around 10 to 11 digits. Do NOT use signs."
+                );
+            }
+
             _number = number;
         }
 
@@ -27,6 +43,9 @@ namespace Domain.Establishments.ValueObjects
 
         public static bool operator ==(Phone left, Phone right) 
         {
+            if(left is null && right is null)
+                return true;
+
             return left.Equals(right);
         }
 
@@ -34,11 +53,6 @@ namespace Domain.Establishments.ValueObjects
         {
             return left != right;
         }
-
-        // public override int GetHashCode()
-        // {
-        //     return HashCode.Combine(_name);
-        // }
 
         public override string ToString()
         {

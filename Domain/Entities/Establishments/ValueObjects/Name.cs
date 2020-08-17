@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Domain.Establishments.Exceptions;
+using Domain.Entities.Establishments.Exceptions;
 
-namespace Domain.Establishments.ValueObjects
+namespace Domain.Entities.Establishments.ValueObjects
 {
     public class Name : IEquatable<Name>
     {
@@ -29,6 +29,9 @@ namespace Domain.Establishments.ValueObjects
 
         public static bool operator ==(Name left, Name right) 
         {
+            if(left is null && right is null)
+                return true;
+                
             return left.Equals(right);
         }
 
@@ -36,11 +39,6 @@ namespace Domain.Establishments.ValueObjects
         {
             return left != right;
         }
-
-        // public override int GetHashCode()
-        // {
-        //     return HashCode.Combine(_name);
-        // }
 
         public override string ToString()
         {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Domain.Establishments.Exceptions;
+using Domain.Entities.Establishments.Exceptions;
 
-namespace Domain.Establishments.ValueObjects
+namespace Domain.Entities.Establishments.ValueObjects
 {
     public class CNPJ : IEquatable<CNPJ>
     {
@@ -29,6 +29,9 @@ namespace Domain.Establishments.ValueObjects
 
         public static bool operator ==(CNPJ left, CNPJ right) 
         {
+            if(left is null && right is null)
+                return true;
+
             return left.Equals(right);
         }
 

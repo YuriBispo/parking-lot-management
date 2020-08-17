@@ -1,54 +1,53 @@
 using System;
 using System.Collections.Generic;
+using Domain.Entities.Establishments.Exceptions;
 using Data = Domain.Data;
 
-namespace Domain.Addresses
+namespace Domain.Entities.Addresses
 {
     public class Address
     {
-        public string Street;
-        public string Number;
-        public string Complement;
-        public string Neighbourhood;
-        public string City;
-        public string State;
-        public string ZipCode;
+        public int Id { get; private set; }
+        public string Street { get; private set; }
+        public string Number { get; private set; }
+        public string Complement { get; private set; }
+        public string Neighbourhood { get; private set; }
+        public string City { get; private set; }
+        public string State { get; private set; }
+        public string ZipCode { get; private set; }
 
         public Address(string street, string number, string neighbourhood,
             string city, string state, string zipCode, string complement)
         {
             if(string.IsNullOrWhiteSpace(street))
-                throw new Exception();
+                throw new AddressFieldShouldNotBeEmpty("street");
                 
             Street = street;
             
             if(string.IsNullOrWhiteSpace(number))
-                throw new Exception();
+                throw new AddressFieldShouldNotBeEmpty("number");
 
             Number = number;
 
             if(string.IsNullOrWhiteSpace(neighbourhood))
-                throw new Exception();
+                throw new AddressFieldShouldNotBeEmpty("neighbourhood");
                 
             Neighbourhood = neighbourhood;
 
             if(string.IsNullOrWhiteSpace(city))
-                throw new Exception();
+                throw new AddressFieldShouldNotBeEmpty("city");
 
             City = city;
 
             if(string.IsNullOrWhiteSpace(state))
-                throw new Exception();
+                throw new AddressFieldShouldNotBeEmpty("state");
 
             State = state;
 
             if(string.IsNullOrWhiteSpace(zipCode))
-                throw new Exception();
+                throw new AddressFieldShouldNotBeEmpty("zipCode");
 
             ZipCode = zipCode;
-
-            if(string.IsNullOrWhiteSpace(complement))
-                throw new Exception();
 
             Complement = complement;
         }
@@ -60,6 +59,9 @@ namespace Domain.Addresses
 
         public static bool operator ==(Address left, Address right) 
         {
+            if(left is null && right is null)
+                return true;
+
             return left.Equals(right);
         }
 
@@ -83,6 +85,11 @@ namespace Domain.Addresses
             return Convert.ToUInt64(zipCode).ToString(@"00000\-000");
         }
 
+        public Data.Address ToDataEntity() {
+            return new Data.Address(Id, Street, Number, Complement, Neighbourhood, 
+                City, State, ZipCode);
+        }
+
         public override int GetHashCode()
         {
             int hashCode = -396883702;
@@ -94,11 +101,6 @@ namespace Domain.Addresses
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(State);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ZipCode);
             return hashCode;
-        }
-
-        public Data.Address ToDataEntity() {
-            return new Data.Address(Street, Number, Complement, Neighbourhood, 
-                City, State, ZipCode);
         }
     }
 }

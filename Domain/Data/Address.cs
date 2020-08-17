@@ -1,18 +1,20 @@
 namespace Domain.Data
 {
-    public class Address
+    public sealed class Address
     {
-        public string Street;
-        public string Number;
-        public string Complement;
-        public string Neighbourhood;
-        public string City;
-        public string State;
-        public string ZipCode;
+        public int Id { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public string Complement { get; set; }
+        public string Neighbourhood { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
 
-        public Address(string street, string number, string complement, 
+        public Address(int id, string street, string number, string complement, 
             string neighbourhood, string city, string state, string zipCode)
         {
+            Id = id;
             Street = street;
             Number = number;
             Complement = complement;
