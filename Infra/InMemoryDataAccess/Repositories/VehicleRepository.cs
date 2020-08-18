@@ -15,6 +15,11 @@ namespace Infra.InMemoryDataAccess.Repositories
             _context = context;
         }
 
+        public void CommitChanges()
+        {
+            _context.SaveChanges();
+        }
+
         public async Task<Data.Vehicle> Create(Data.Vehicle entity)
         {
             await _context.AddAsync(entity);
@@ -44,7 +49,10 @@ namespace Infra.InMemoryDataAccess.Repositories
 
         public Data.Vehicle Update(Data.Vehicle entity)
         {
-            _context.Update(entity);
+            var oldEntity = _context.Vehicles.Find(entity.Id);
+
+            _context.Entry(oldEntity).CurrentValues.SetValues(entity);
+            
             return entity;
         }
     }

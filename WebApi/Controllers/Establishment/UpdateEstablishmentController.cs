@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Establishment
 {
-    [Route("/api/teste")]
+    [Route("/api/establishments")]
     public class UpdateEstablishmentController : ControllerBase
     {
         [HttpPut]

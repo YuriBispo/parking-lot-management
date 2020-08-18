@@ -57,10 +57,10 @@ namespace Domain.Entities.Establishments
             }
         }
 
-        public Data.Establishment ToDataEntity()
+        public Data.Establishment ToDataEntity(int? id = null)
         {
             return new Data.Establishment(
-                Id,
+                id ?? Id,
                 Name.ToString(),
                 CNPJ.ToString(),
                 Address.ToDataEntity(),

@@ -39,10 +39,7 @@ namespace Application.Handlers.Establishments
                 request.CarsCapacity,
                 request.MotorcyclesCapacity);
 
-            var establishmentStored = _repository.GetById(request.Id);
-
-            establishmentStored = establishment.ToDataEntity();
-            var result = _repository.Update(establishmentStored);
+            var result = _repository.Update(establishment.ToDataEntity());
 
             _repository.CommitChanges();
 

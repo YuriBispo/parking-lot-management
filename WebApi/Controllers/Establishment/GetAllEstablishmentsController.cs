@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Establishment
 {
-    [Route("/api/teste")]
+    [Route("/api/establishments")]
     public class GetAllEstablishmentsController : ControllerBase
     {
         [HttpGet]

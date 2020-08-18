@@ -11,5 +11,6 @@ namespace Infra.InMemoryDataAccess.Repositories.IRepositories
         Vehicle GetById(int Id);
         Vehicle Update(Vehicle entity);
         int Delete(int Id);
+        void CommitChanges();
     }
 }

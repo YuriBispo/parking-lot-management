@@ -38,6 +38,7 @@ namespace WebApi
                 .UseInMemoryDatabase("parking-lot"));
             services
                 .AddTransient<IEstablishmentRepository, EstablishmentRepository>();
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
 
             services.AddMediatR(assembly);
         }

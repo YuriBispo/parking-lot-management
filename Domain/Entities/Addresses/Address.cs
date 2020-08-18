@@ -85,8 +85,8 @@ namespace Domain.Entities.Addresses
             return Convert.ToUInt64(zipCode).ToString(@"00000\-000");
         }
 
-        public Data.Address ToDataEntity() {
-            return new Data.Address(Id, Street, Number, Complement, Neighbourhood, 
+        public Data.Address ToDataEntity(int? id = null) {
+            return new Data.Address(id ?? Id, Street, Number, Complement, Neighbourhood, 
                 City, State, ZipCode);
         }
 

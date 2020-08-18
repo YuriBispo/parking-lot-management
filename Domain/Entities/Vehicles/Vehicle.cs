@@ -15,6 +15,11 @@ namespace Domain.Entities.Vehicles
         public LicensePlate LicensePlate { get; private set; }
         public VehicleType Type { get; private set; }
 
+        public Vehicle()
+        {
+            
+        }
+        
         public Vehicle(string brand, string model, Color color, LicensePlate licensePlate, VehicleType type)
         {
             if(string.IsNullOrWhiteSpace(brand))
@@ -31,9 +36,9 @@ namespace Domain.Entities.Vehicles
             Type = type;
         }
 
-        public Data.Vehicle ToDataEntity()
+        public Data.Vehicle ToDataEntity(int? id = null)
         {
-            return new Data.Vehicle(Id, Brand, Model, Color.ToString(), 
+            return new Data.Vehicle(id ?? Id, Brand, Model, Color.ToString(), 
                 LicensePlate.ToString(), VehicleType.Car);
         }
     }

@@ -52,7 +52,10 @@ namespace Infra.InMemoryDataAccess.Repositories
 
         public Data.Establishment Update(Data.Establishment entity)
         {
-            _context.Update(entity);
+            var oldEntity = _context.Establishments.Find(entity.Id);
+
+            _context.Entry(oldEntity).CurrentValues.SetValues(entity);
+            
             return entity;
         }
     }

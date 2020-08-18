@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
-using Application.Boundaries.Establishments.Commands.Requests;
+using Application.Boundaries.Vehicles.Commands.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers.Establishment
+namespace WebApi.Controllers.Vehicle
 {
-    [Route("/api/establishments")]
-    public class DeleteEstablishmentController : ControllerBase
+    [Route("/api/vehicles")]
+    public class DeleteVehicleController : ControllerBase
     {
         [HttpDelete]
         [Route("{id}")]
@@ -14,7 +14,7 @@ namespace WebApi.Controllers.Establishment
             [FromServices]IMediator mediator,
             [FromRoute] int id)
         {
-            var result = await mediator.Send(new DeleteEstablishmentRequest(id));
+            var result = await mediator.Send(new DeleteVehicleRequest(id));
             return Ok(result);
         }
     }

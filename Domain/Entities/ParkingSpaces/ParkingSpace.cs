@@ -16,9 +16,9 @@ namespace Domain.Entities.ParkingSpaces
             Type = type;
         }
 
-        public Data.ParkingSpace ToDataEntity()
+        public Data.ParkingSpace ToDataEntity(int? id = null)
         {
-            return new Data.ParkingSpace(Id, Type);
+            return new Data.ParkingSpace(id ?? Id, Type);
         }
 
         public void Occupy(int vehicleId)
