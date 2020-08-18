@@ -52,6 +52,17 @@ namespace Domain.Entities.Addresses
             Complement = complement;
         }
 
+        public Address(Data.Address address)
+        {
+            Street = address.Street;
+            Number = address.Number;
+            Neighbourhood = address.Neighbourhood;
+            City = address.City;
+            State = address.State;
+            ZipCode = address.ZipCode;
+            Complement = address.Complement;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Address c && this.Equals(c);

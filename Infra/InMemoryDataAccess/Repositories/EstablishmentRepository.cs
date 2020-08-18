@@ -47,6 +47,11 @@ namespace Infra.InMemoryDataAccess.Repositories
             return _context.Establishments
                 .AsNoTracking()
                 .Include(x => x.Address)
+                .Include(x => x.ParkingSpaces)
+                    .ThenInclude(x => x.Vehicle)
+                .Include(x => x.ParkingSpaces)
+                    .ThenInclude(x => x.VehicleId)
+
                 .FirstOrDefault(x => x.Id == Id);
         }
 

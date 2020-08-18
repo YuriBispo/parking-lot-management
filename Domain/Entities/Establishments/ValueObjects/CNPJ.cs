@@ -42,12 +42,22 @@ namespace Domain.Entities.Establishments.ValueObjects
 
         public override string ToString()
         {
+            if(IsFormatted())
+                return _cnpj;
+
             return Convert.ToUInt64(_cnpj).ToString(@"00\.000\.000\/0000\-00");
+        }
+
+        private bool IsFormatted()
+        {
+            return _cnpj.Contains(".") && _cnpj.Contains("/") 
+                && _cnpj.Contains("-"); 
         }
 
         public override int GetHashCode()
         {
-            return -1296379671 + EqualityComparer<string>.Default.GetHashCode(_cnpj);
+            return -1296379671 + EqualityComparer<string>
+                .Default.GetHashCode(_cnpj);
         }
     }
 }

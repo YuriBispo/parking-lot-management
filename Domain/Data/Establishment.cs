@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Domain.Entities;
+using Entities = Domain.Entities;
 
 namespace Domain.Data
 {
-    public sealed class Establishment : IDataEntity
+    public sealed class Establishment : Entities.IDataEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace Domain.Data
         }
         
         public Establishment(int id,string name, string cnpj, Address address, string phone,
-            int carsCapacity, int motorcyclesCapacity)
+            int carsCapacity, int motorcyclesCapacity, ICollection<Entities.ParkingSpaces.ParkingSpace> parkingSpaces)
         {
             Id = id;
             Name = name;
@@ -29,6 +29,14 @@ namespace Domain.Data
             Phone = phone;
             CarsCapacity = carsCapacity;
             MotorcyclesCapacity = motorcyclesCapacity;
+            
+            foreach (var parkingSpace in parkingSpaces)
+            {
+                if(ParkingSpaces == null)
+                    ParkingSpaces = new List<ParkingSpace>();
+
+                ParkingSpaces.Add(parkingSpace.ToDataEntity());
+            }            
         }
     }
 }

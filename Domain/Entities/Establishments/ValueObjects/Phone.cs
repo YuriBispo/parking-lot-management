@@ -23,7 +23,7 @@ namespace Domain.Entities.Establishments.ValueObjects
             if(number.Length > 11 || number.Length < 8) 
             {
                 throw new PhoneNumberInvalidFormatException(
-                    "Phone number should be around 10 to 11 digits. Do NOT use signs."
+                    "Phone number should be around 8 to 11 digits. Do NOT use signs."
                 );
             }
 
