@@ -2,6 +2,10 @@ namespace Application.Boundaries.ParkingSpaces.Responses
 {
     public class OccupyParkingSpaceResponse
     {
+        public OccupyParkingSpaceResponse()
+        {
+            
+        }
         public OccupyParkingSpaceResponse(int parkingSpaceId,
             int vehicleId, 
             bool isAvailable)

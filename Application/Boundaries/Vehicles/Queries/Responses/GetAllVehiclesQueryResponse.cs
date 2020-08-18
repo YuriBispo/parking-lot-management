@@ -4,6 +4,10 @@ namespace Application.Boundaries.Vehicles.Queries.Responses
 {
     public class GetAllVehiclesQueryResponse
     {
+        public GetAllVehiclesQueryResponse()
+        {
+            
+        }
         public GetAllVehiclesQueryResponse(int id, string brand, string model, 
             string color, string licensePlate, VehicleType type)
         {

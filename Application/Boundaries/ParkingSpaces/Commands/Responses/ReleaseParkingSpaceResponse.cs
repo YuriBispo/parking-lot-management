@@ -2,6 +2,10 @@
 {
     public class ReleaseParkingSpaceResponse
     {
+        public ReleaseParkingSpaceResponse()
+        {
+            
+        }
         public ReleaseParkingSpaceResponse(int parkingSpaceId,
             int vehicleId, 
             bool isAvailable,

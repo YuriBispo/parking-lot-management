@@ -21,5 +21,6 @@ If you are Visual Studio Community instead of VSCode, all you need to do is hit 
 ---
 - Clean Architecture principles with Mediator Pattern;
 - Repository Pattern;
+- DDD concepts (Value Objects, Entities, Aggregates);
 - TDD (Domain Unit Tests only);
 - Command Query Separation.

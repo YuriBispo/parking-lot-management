@@ -2,6 +2,10 @@ namespace Application.Boundaries.Establishments.Commands.Responses
 {
     public class UpdateEstablishmentResponse
     {
+        public UpdateEstablishmentResponse()
+        {
+        }
+
         public UpdateEstablishmentResponse(int id, string name, string cnpj, 
             string address, string phone, int carsCapacity, 
             int motorcyclesCapacity)

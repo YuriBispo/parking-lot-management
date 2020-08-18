@@ -15,6 +15,11 @@ namespace Application.Boundaries.Establishments.Commands.Responses
             MotorcyclesCapacity = motorcyclesCapacity;
         }
 
+        public CreateEstablishmentResponse()
+        {
+            
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string CNPJ { get; set; }

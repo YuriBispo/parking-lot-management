@@ -41,6 +41,9 @@ namespace WebApi
             services.AddTransient<IVehicleRepository, VehicleRepository>();
 
             services.AddMediatR(assembly);
+
+            services.AddMvc()
+                .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

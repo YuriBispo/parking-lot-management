@@ -2,6 +2,10 @@ namespace Application.Boundaries.Establishments.Queries.Responses
 {
     public class GetEstablishmentByIdQueryResponse
     {
+        public GetEstablishmentByIdQueryResponse()
+        {
+            
+        }
         public GetEstablishmentByIdQueryResponse(int id, string name, 
             string cnpj, string address, string phone, int carsCapacity, 
             int motorcyclesCapacity)

@@ -4,6 +4,10 @@ namespace Application.Boundaries.Vehicles.Commands.Responses
 {
     public class UpdateVehicleResponse
     {
+        public UpdateVehicleResponse()
+        {
+            
+        }
         public UpdateVehicleResponse(int id, string brand, string model, 
             string color, string licensePlate, VehicleType type)
         {

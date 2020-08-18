@@ -6,6 +6,10 @@ namespace Application.Boundaries.ParkingSpaces.Queries.Responses
 {
     public class OccupyParkingSpaceQueryResponse
     {
+        public OccupyParkingSpaceQueryResponse()
+        {
+            
+        }
         public OccupyParkingSpaceQueryResponse(IList<ParkingSpace> parkingSpaces)
         {
             foreach (var parkingSpace in parkingSpaces)
