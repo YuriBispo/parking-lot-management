@@ -10,7 +10,10 @@ cd WebApi
 dotnet run
 ```
 
-If you are Visual Studio Community instead of VSCode, all you need to do is hit F5.
+If you are using Visual Studio Community instead of VSCode, it might be necessary fix a few project reference issues.
+I preloaded a .sln file to make it feel less painful :].
+
+I worked on this in my linux machine, to be clear.
 
 ### Main technologies and concepts used
 
